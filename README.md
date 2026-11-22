@@ -1,16 +1,17 @@
 # imamfikri.github.io
 
-Personal portfolio. Two case studies in operations tooling and product.
+Personal portfolio: a short, results-first homepage plus the full case studies.
 
-**Live:** https://imamfikri.github.io
+**Live:** https://im-kri.github.io/portfolio/
 
 ## What's here
 
-A single self-contained HTML page. No build step, no framework, no dependencies beyond
+Two self-contained HTML pages. No build step, no framework, no dependencies beyond
 webfonts. Editing `index.html` and pushing is the entire deployment process.
 
 ```
-index.html          the whole site
+index.html          homepage: journey, growth charts, selected results
+story.html          full case studies (Creator Discovery Lab, Ekta)
 images/             screenshots, redacted
 ```
 
