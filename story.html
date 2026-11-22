@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imam Fikri | I build the tools that do my job</title>
+<meta name="description" content="Imam Fikri builds internal tools, automation and decision systems for creator marketing and field operations. Two case studies: Creator Discovery Lab and Ekta.">
+
+<meta property="og:title" content="Imam Fikri | I build the tools that do my job">
+<meta property="og:description" content="Operations lead who ships production software. Two systems, no engineering team.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#16181d;
+  --ink-soft:#4a4f5a;
+  --ink-faint:#878d99;
+  --rule:#e2e4e8;
+  --rule-soft:#eef0f3;
+  --paper:#fbfbf9;
+  --paper-raised:#ffffff;
+  --accent:#b0361f;
+  --accent-soft:#f6ece9;
+  --ok:#1f6f4a;
+  --max:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+
+h1,h2,h3,h4{font-family:'Newsreader',Georgia,serif;font-weight:400;letter-spacing:-0.01em;line-height:1.15}
+h1{font-size:clamp(2.6rem,6vw,4.4rem)}
+h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+h3{font-size:1.45rem}
+h4{font-size:1.12rem;font-family:'Inter',sans-serif;font-weight:600;letter-spacing:0}
+.mono{font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint)}
+.lede{font-size:1.2rem;color:var(--ink-soft);max-width:62ch}
+a{color:inherit}
+
+header{
+  border-bottom:1px solid var(--rule);padding:22px 0;position:sticky;top:0;
+  background:rgba(251,251,249,0.88);backdrop-filter:saturate(180%) blur(12px);z-index:50;
+}
+.header-in{display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.brandmark{font-family:'Newsreader',serif;font-size:1.15rem}
+nav{display:flex;gap:26px;font-size:0.82rem;color:var(--ink-soft)}
+nav a{text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s,color .15s}
+nav a:hover{color:var(--ink);border-bottom-color:var(--accent)}
+
+.hero{padding:100px 0 76px;border-bottom:1px solid var(--rule)}
+.hero h1{margin:26px 0 30px;max-width:17ch}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:38px;font-size:0.86rem;color:var(--ink-soft)}
+.tag{border:1px solid var(--rule);border-radius:100px;padding:5px 13px;background:var(--paper-raised);font-size:0.78rem}
+.contact-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-block;text-decoration:none;font-size:0.88rem;font-weight:500;padding:11px 20px;border-radius:6px;transition:transform .12s,background .15s,border-color .15s}
+.btn-primary{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.btn-ghost:hover{border-color:var(--ink)}
+
+section{padding:84px 0;border-bottom:1px solid var(--rule)}
+.sec-head{margin-bottom:44px}
+.sec-head h2{margin:12px 0 16px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:34px 0}
+.stat{background:var(--paper-raised);padding:22px 20px}
+.stat .n{font-family:'JetBrains Mono',monospace;font-size:1.7rem;font-weight:500;letter-spacing:-0.03em;display:block;line-height:1.1}
+.stat .n.hi{color:var(--accent)}
+.stat .l{font-size:0.78rem;color:var(--ink-faint);margin-top:8px;display:block;line-height:1.45}
+
+.exhibit-head{display:grid;grid-template-columns:1fr;gap:8px;padding-bottom:28px;border-bottom:2px solid var(--ink);margin-bottom:36px}
+.exhibit-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.16em;color:var(--accent);text-transform:uppercase}
+.factbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px 30px;margin:28px 0 46px;padding:24px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.fact .k{font-size:0.7rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-faint);font-family:'JetBrains Mono',monospace}
+.fact .v{font-size:0.93rem;margin-top:7px;color:var(--ink)}
+
+.narrative{max-width:66ch}
+.narrative p{margin-bottom:18px;color:var(--ink-soft)}
+.narrative p strong{color:var(--ink);font-weight:600}
+.pull{border-left:3px solid var(--accent);padding:4px 0 4px 22px;margin:32px 0;font-family:'Newsreader',serif;font-size:1.3rem;line-height:1.45;color:var(--ink);max-width:56ch}
+
+/* reframe block */
+.reframe{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin:36px 0;max-width:820px}
+.reframe .side{border:1px solid var(--rule);border-radius:9px;padding:22px;background:var(--paper-raised)}
+.reframe .side.was{color:var(--ink-faint)}
+.reframe .side .k{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px;display:block}
+.reframe .side.became{border-color:var(--accent);background:var(--accent-soft)}
+.reframe .arrow{color:var(--accent);font-size:1.4rem}
+.reframe .side p{font-size:1rem;line-height:1.45;font-family:'Newsreader',serif}
+
+/* decisions */
+.decisions{counter-reset:d;margin-top:14px}
+.dec{
+  counter-increment:d;display:grid;grid-template-columns:52px 1fr;gap:26px;
+  padding:30px 0;border-top:1px solid var(--rule);
+}
+.dec:last-child{border-bottom:1px solid var(--rule)}
+.dec::before{
+  content:counter(d,decimal-leading-zero);
+  font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--accent);padding-top:4px;
+}
+.dec h4{margin-bottom:12px}
+.dec p{font-size:0.94rem;color:var(--ink-soft);margin-bottom:12px;max-width:64ch}
+.dec p:last-child{margin-bottom:0}
+.dec .evidence{
+  font-size:0.85rem;color:var(--ink);background:var(--paper-raised);
+  border:1px solid var(--rule);border-radius:7px;padding:14px 17px;max-width:64ch;
+}
+.dec .evidence b{font-family:'JetBrains Mono',monospace;font-size:0.66rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:6px;font-weight:400}
+
+.modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;margin-top:36px}
+.mod{background:var(--paper-raised);border:1px solid var(--rule);border-radius:9px;padding:26px 24px}
+.mod h4{margin-bottom:14px;display:flex;align-items:baseline;gap:10px}
+.mod h4 span{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--ink-faint);font-weight:400}
+.mod .prob{font-size:0.9rem;color:var(--ink-faint);margin-bottom:14px;font-style:italic;line-height:1.55}
+.mod p{font-size:0.92rem;color:var(--ink-soft);margin-bottom:14px}
+.mod ul{list-style:none;font-size:0.88rem}
+.mod li{padding-left:17px;position:relative;margin-bottom:8px;color:var(--ink-soft);line-height:1.55}
+.mod li::before{content:"→";position:absolute;left:0;color:var(--accent);font-size:0.82rem}
+.mod li b{color:var(--ink);font-weight:600}
+
+.tbl-wrap{overflow-x:auto;margin:30px 0;border:1px solid var(--rule);border-radius:8px;background:var(--paper-raised)}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th,td{padding:13px 20px;text-align:left;border-bottom:1px solid var(--rule-soft)}
+tr:last-child td{border-bottom:none}
+th{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);font-weight:400;background:var(--paper)}
+td.num{font-family:'JetBrains Mono',monospace;text-align:right}
+td.after{color:var(--ok);font-weight:500}
+
+.principles{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:34px}
+.principle{border-top:2px solid var(--ink);padding-top:18px}
+.principle h4{margin-bottom:10px}
+.principle p{font-size:0.9rem;color:var(--ink-soft)}
+
+.auto-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:28px}
+.auto{background:var(--paper-raised);border:1px solid var(--rule);border-radius:9px;padding:22px}
+.auto h4{font-size:0.95rem;margin-bottom:9px}
+.auto p{font-size:0.87rem;color:var(--ink-soft)}
+
+.shot-real{margin:34px 0}
+.shot-real img{width:100%;display:block;border:1px solid var(--rule);border-radius:9px}
+.shot-real figcaption{font-size:0.83rem;color:var(--ink-faint);margin-top:12px;max-width:64ch;line-height:1.55}
+.shot{border:1px dashed #c9ccd2;border-radius:9px;background:#f4f5f3;padding:52px 26px;text-align:center;color:var(--ink-faint);font-size:0.85rem;margin:30px 0}
+.shot .mono{display:block;font-size:0.72rem;margin-top:10px;color:#a8adb6;line-height:1.6}
+.shot img{max-width:100%;border-radius:6px;display:block;margin:0 auto}
+
+.todo{background:#fff8e6;border:1px solid #e8d9a8;border-left:4px solid #c99a2e;border-radius:6px;padding:20px 24px;margin:28px 0;font-size:0.9rem;color:#6b5518}
+.todo b{display:block;margin-bottom:8px;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+.todo ul{margin:10px 0 0 18px}
+.todo li{margin-bottom:6px}
+
+.timeline{margin-top:36px}
+.tl-item{display:grid;grid-template-columns:190px 1fr;gap:30px;padding:26px 0;border-top:1px solid var(--rule)}
+.tl-item:last-child{border-bottom:1px solid var(--rule)}
+.tl-when{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--ink-faint);padding-top:3px}
+.tl-role{font-weight:600;font-size:0.98rem}
+.tl-org{color:var(--ink-faint);font-size:0.88rem;margin-bottom:10px}
+.tl-body{font-size:0.9rem;color:var(--ink-soft)}
+
+.belt{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;margin-top:30px}
+.belt-col h4{margin-bottom:12px;font-size:0.75rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;font-weight:400}
+.belt-col ul{list-style:none;font-size:0.9rem;color:var(--ink-soft)}
+.belt-col li{margin-bottom:6px}
+
+footer{padding:76px 0 90px;text-align:center}
+footer h2{margin-bottom:18px}
+footer p{color:var(--ink-soft);max-width:48ch;margin:0 auto 30px}
+.foot-note{margin-top:56px;font-size:0.76rem;color:var(--ink-faint);font-family:'JetBrains Mono',monospace;line-height:1.8}
+
+@media(max-width:760px){
+  .reframe{grid-template-columns:1fr;gap:12px}
+  .reframe .arrow{transform:rotate(90deg);text-align:center}
+}
+@media(max-width:640px){
+  .wrap{padding:0 20px}
+  .hero{padding:64px 0 52px}
+  section{padding:58px 0}
+  .tl-item{grid-template-columns:1fr;gap:8px}
+  .dec{grid-template-columns:1fr;gap:10px}
+  nav{gap:16px;font-size:0.76rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-in">
+    <div class="brandmark">Imam Fikri</div>
+    <nav>
+      <a href="#discovery-lab">Creator Discovery Lab</a>
+      <a href="#ekta">Ekta</a>
+      <a href="#how">How I work</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Product thinking &middot; Internal tools &middot; Automation</div>
+    <h1>I build the tools that <em>do my job.</em></h1>
+    <p class="lede">
+      I run KOL and community operations at a creator marketing agency in Bali. Rather than doing
+      the repetitive parts by hand, I designed and built the system that does them: a discovery
+      pipeline, a scored decision database, a reporting layer that recommends rather than reports,
+      and a Chrome extension that puts the workflow onto Instagram itself. Six modules in
+      production. No engineering team.
+    </p>
+
+    <div class="hero-meta">
+      <span class="tag">Bali / Jakarta, Indonesia</span>
+      <span class="tag">Open to remote</span>
+      <span class="tag">Community &amp; Partnerships &middot; Brand &amp; Social &middot; Product &amp; Internal Tools</span>
+    </div>
+
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:imamfikri.ir@gmail.com">Get in touch</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/imamfikri/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="#discovery-lab">See the work</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ POSITIONING ============ -->
+<section>
+  <div class="wrap">
+    <div class="narrative">
+      <div class="eyebrow">The short version</div>
+      <h2 style="margin:14px 0 24px">Two systems, two different arguments.</h2>
+      <p>
+        Six years in community, partnerships and project management: GoTo, Moka, a national
+        campaign platform, now creator marketing. The thread isn't a job title. It's that I keep
+        finding the part of the work that shouldn't be done by a human, and removing it.
+      </p>
+      <p>
+        <strong>Creator Discovery Lab</strong> is the case for depth: I found the problem by doing
+        the job, framed it, designed the product, built it and now operate it, alone, using
+        AI-assisted development, no engineers involved.
+        <strong>Ekta</strong> is the case for scale: product manager on a field canvassing platform
+        that logged over half a million activities in six months, with a real engineering team and
+        an immovable deadline.
+      </p>
+      <div class="pull">
+        One proves I can build without waiting for permission.<br>
+        The other proves I can build inside an organisation.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXHIBIT 01 ============ -->
+<section id="discovery-lab">
+  <div class="wrap">
+
+    <div class="exhibit-head">
+      <div class="exhibit-num">Exhibit 01 &middot; Product case study</div>
+      <h2>Creator Discovery Lab</h2>
+      <p class="lede" style="font-size:1.05rem">
+        A decision system for creator marketing operations. HeyRCG, Bali.
+      </p>
+    </div>
+
+    <div class="factbar">
+      <div class="fact"><div class="k">Role</div><div class="v">Problem framing → design → build → operate</div></div>
+      <div class="fact"><div class="k">Team</div><div class="v">One person, no engineers</div></div>
+      <div class="fact"><div class="k">Method</div><div class="v">AI-assisted development</div></div>
+      <div class="fact"><div class="k">Status</div><div class="v">In production, daily use</div></div>
+      <div class="fact"><div class="k">Serves</div><div class="v">10 client brands in F&amp;B, fitness, hospitality</div></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="n hi">0</span><span class="l">Engineers involved</span></div>
+      <div class="stat"><span class="n">6</span><span class="l">Modules shipped to production</span></div>
+      <div class="stat"><span class="n">8 mo</span><span class="l">From first line to full operation</span></div>
+      <div class="stat"><span class="n">10</span><span class="l">Client brands on one system</span></div>
+      <div class="stat"><span class="n">~3k</span><span class="l">Creators under active management</span></div>
+      <div class="stat"><span class="n hi">194&times;</span><span class="l">Faster after the performance rescue</span></div>
+    </div>
+
+    <!-- ---- 1. observation ---- -->
+    <div class="narrative">
+      <h3 style="margin:20px 0 18px">I found the problem by being the one with the problem</h3>
+      <p>
+        I wasn't handed a brief. I was hired to do creator outreach, and the job itself was the
+        research. Finding creators in Bali meant browsing Instagram hashtags, tagged posts and
+        follower lists by hand: hours of scrolling, no record of who I'd already seen, the same
+        profiles resurfacing week after week. Relationships lived in a spreadsheet with twelve
+        outreach statuses and no signal about who was actually worth chasing. Creator deliverables
+        landed in Drive with no link back to the creator, brand or campaign, so "what did this
+        creator make for us" meant asking whoever remembered.
+      </p>
+      <p>
+        Every one of those is a symptom. The mistake would have been to build a fix for each.
+      </p>
+    </div>
+
+    <!-- ---- 2. reframe ---- -->
+    <h3 style="margin:44px 0 6px">Reframing the problem</h3>
+    <p style="color:var(--ink-soft);max-width:62ch">The brief everyone assumes, versus the one worth building for.</p>
+
+    <div class="reframe">
+      <div class="side was">
+        <span class="k">Obvious problem</span>
+        <p>"We don't have a creator database."</p>
+      </div>
+      <div class="arrow">&rarr;</div>
+      <div class="side became">
+        <span class="k">Actual problem</span>
+        <p>"We can't tell who's worth contacting today."</p>
+      </div>
+    </div>
+
+    <div class="narrative">
+      <p>
+        Those two problems produce completely different products. The first gives you a searchable
+        list, which is what most creator tools are, and which still leaves a human reading rows
+        and guessing. The second gives you a system that <strong>ranks, filters and recommends</strong>,
+        so the human is choosing between three options instead of three thousand.
+      </p>
+      <p>
+        Everything downstream came from committing to the second framing.
+      </p>
+    </div>
+
+    <!-- ---- 3. the decisions ---- -->
+    <h3 style="margin:56px 0 6px">The five decisions that shaped it</h3>
+    <p style="color:var(--ink-soft);max-width:62ch">These are the parts I'd actually want to defend in an interview.</p>
+
+    <div class="decisions">
+
+      <div class="dec">
+        <div>
+          <h4>Every screen has to answer "what should I do next"</h4>
+          <p>
+            This is the product's one rule, and I applied it everywhere as a test: if a screen shows
+            you a number without implying an action, it's not finished. A creator list becomes four
+            priority quadrants. A brand's progress becomes a gap, not a count. A performance chart
+            becomes a recommendation.
+          </p>
+          <div class="evidence">
+            <b>How it shows up</b>
+            The database opens on <em>Available &amp; Hot</em>, <em>Active Pipeline</em>,
+            <em>Watch &amp; Warm</em> and <em>Low Priority</em>, each with an instruction attached
+            ("pitch for next brand", "monitor progress", "revisit or drop"). Brand targets read
+            "20 more needed to hit target" rather than a raw count. The reporting layer surfaces
+            the best day of the week to send outreach, as a sentence.
+          </div>
+        </div>
+      </div>
+
+      <div class="dec">
+        <div>
+          <h4>Encode judgment as explicit, tunable rules</h4>
+          <p>
+            The knowledge that made outreach work (which creators are worth the effort, how long to
+            wait before re-contacting, when a cold profile becomes fair game again) lived in my head
+            and nowhere else. That's a single point of failure and it doesn't scale past one person.
+          </p>
+          <p>
+            So I wrote it down as thresholds the system enforces: a composite score built from
+            engagement rate, follower tier, location and recency; a 30-day cooldown before re-pitching;
+            a 75-day window before a passed-over profile can resurface. Explicit rules can be argued
+            with and tuned. Tribal knowledge can't.
+          </p>
+        </div>
+      </div>
+
+      <div class="dec">
+        <div>
+          <h4>Design for the client's chaos, not my own</h4>
+          <p>
+            Client brand content lives in client-owned Drives, organised however each client feels
+            like organising it, and they reorganise without telling anyone. The tempting build is to
+            copy everything somewhere clean. That creates a sync problem, a storage cost, and a
+            permissions headache.
+          </p>
+          <p>
+            Instead I index in place and derive <strong>nothing</strong> from folder names: brand comes
+            from a registry, dates from file metadata, media type from MIME type. Folder paths are
+            stored as searchable labels only. A client can restructure their entire Drive and the
+            system doesn't notice. A canonical category layer maps each client's own vocabulary onto
+            shared categories, so different naming conventions become one consistent browse experience.
+          </p>
+          <div class="evidence">
+            <b>The payoff</b>
+            Onboarding a new brand is a configuration change, not a deployment. That's the difference
+            between a tool that serves three brands and one that serves thirty.
+          </div>
+        </div>
+      </div>
+
+      <div class="dec">
+        <div>
+          <h4>Close the loop: measure whether the advice was any good</h4>
+          <p>
+            A prioritisation system that never checks its own predictions is just an opinion with a
+            database attached. So the reporting layer tracks outcomes back against the inputs:
+            conversion by follower tier, by content category, by location, by outreach week.
+          </p>
+          <p>
+            That loop produced findings I would not have guessed and that changed how the team
+            works: that mid-tier creators convert meaningfully better than the micro tier everyone
+            defaults to, and that day-of-week has a real effect on reply rate. The system now
+            recommends both. <strong>This is the part I'm proudest of:</strong> it stopped being a
+            place to record work and started being a thing that tells you how to work.
+          </p>
+        </div>
+      </div>
+
+      <div class="dec">
+        <div>
+          <h4>Assume it will fail silently, because it did</h4>
+          <p>
+            Two of the three worst incidents were invisible. An early bug wrote data against the wrong
+            creator because a record was identified by spreadsheet row number, and inserting a row
+            shifted everything. Nothing errored, the data was just quietly wrong. Later, the
+            dashboard degraded to multi-minute load times because two independent caching layers were
+            failing into empty exception handlers, so both had been broken for an unknown length of
+            time with no signal at all.
+          </p>
+          <p>
+            The fix was structural, not tactical: stable IDs everywhere, never positions; failures
+            surface loudly; and a health panel on the database itself that continuously reports how
+            many creator records are active, unreachable or awaiting review, so degradation is visible
+            before someone trips over it.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ---- 4. the build ---- -->
+    <h3 style="margin:56px 0 8px">What that produced</h3>
+    <p style="color:var(--ink-soft);max-width:62ch">Six modules, shipped incrementally over eight months.</p>
+
+    <div class="modules">
+
+      <div class="mod">
+        <h4>Discovery <span>01</span></h4>
+        <div class="prob">Hours of manual Instagram scrolling, with the same profiles resurfacing weekly.</div>
+        <p>An automated pipeline crawling hashtags, tagged posts and the follower graphs of confirmed creators, filtering to a target follower band and writing qualified candidates into a review queue.</p>
+        <ul>
+          <li>Sourcing happens <b>whether or not anyone opens a laptop</b></li>
+          <li>Review turns into a <b>single-screen batch action</b> instead of opening profiles one by one</li>
+          <li>Seen profiles cache so they don't resurface, but <b>un-reviewed candidates are never silently discarded</b></li>
+        </ul>
+      </div>
+
+      <div class="mod">
+        <h4>Database <span>02</span></h4>
+        <div class="prob">A spreadsheet with 12 statuses and no signal about who was worth chasing.</div>
+        <p>The decision surface. A composite score sorts every creator into four action quadrants, filterable by tier, location, brand, area, category and status, with a live priority queue flagging who to contact now.</p>
+        <ul>
+          <li>Answers <b>"who do I contact today"</b> in one screen, not one afternoon</li>
+          <li>Continuous health monitoring flags <b>unreachable and stale records</b> before they mislead anyone</li>
+          <li>Duplicate outreach becomes <b>structurally difficult</b> rather than a thing you have to remember</li>
+        </ul>
+      </div>
+
+      <div class="mod">
+        <h4>Report <span>03</span></h4>
+        <div class="prob">Performance questions answered by hand, from raw data, on request.</div>
+        <p>Conversion analysis by tier, category and location; outreach velocity; single- versus multi-brand retention; per-brand target tracking with the remaining gap stated explicitly.</p>
+        <ul>
+          <li>Reporting moved from <b>manual assembly to always-available</b></li>
+          <li>Reads the same records the team works in daily, so <b>there is no second dataset to reconcile</b></li>
+          <li>Produces <b>recommendations, not just charts</b>: which tier to prioritise, which day to send</li>
+        </ul>
+      </div>
+
+      <div class="mod">
+        <h4>Deliverables <span>04</span></h4>
+        <div class="prob">Creator content scattered across Drive with no link to creator, brand or campaign.</div>
+        <p>An indexer that catalogues deliverables automatically, attributes each to a creator, brand and event, and presents them as a browsable visual library with organic-versus-paid usage tracking.</p>
+        <ul>
+          <li>New content appears <b>without anyone filing it</b></li>
+          <li>Deleted files are detected and removed, so the library <b>never shows content that no longer exists</b></li>
+          <li>"What did this creator make for us" is now <b>a filter, not a conversation</b></li>
+        </ul>
+      </div>
+
+      <div class="mod">
+        <h4>Content Library <span>05</span></h4>
+        <div class="prob">Client brand archives, in client-owned Drives, each organised differently.</div>
+        <p>An index-in-place catalogue that never copies or moves a file, derives nothing from folder names, and maps each client's own vocabulary onto shared categories.</p>
+        <ul>
+          <li>Content stays in the client's Drive, with <b>no duplication, no storage cost, no sync</b></li>
+          <li>A client reorganising their Drive <b>cannot break the system</b></li>
+          <li>New brands onboard through <b>configuration, not code</b></li>
+        </ul>
+      </div>
+
+      <div class="mod">
+        <h4>Chrome Extension <span>06</span></h4>
+        <div class="prob">The highest-friction work happened on Instagram itself, outside every tool.</div>
+        <p>A browser extension putting the workflow where the work actually happens: batch metric capture straight to the master sheet, saved DM templates, an AI message improver, and an overlay flagging profiles already in the database.</p>
+        <ul>
+          <li>Removes <b>manual transcription between browser and spreadsheet</b> entirely</li>
+          <li>Already-contacted creators are <b>flagged on the page itself</b></li>
+          <li>Outreach drafted and polished <b>without leaving Instagram</b></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <figure class="shot-real">
+      <img src="images/database.png" alt="The Creator Discovery Lab database screen, showing four priority quadrants with the rule behind each one, a health bar for record quality, and a filterable creator table.">
+      <figcaption>The database opens on four decision quadrants, each stating its own rule and the action it implies. Creator identities and client names are blurred throughout.</figcaption>
+    </figure>
+
+    <figure class="shot-real">
+      <img src="images/report.png" alt="The reporting screen, showing conversion rate broken down by creator tier, content category and location.">
+      <figcaption>The reporting layer measures its own prioritisation: conversion by tier, category and location. This is where the finding about mid-tier creators came from.</figcaption>
+    </figure>
+
+    <!-- ---- 5. automation ---- -->
+    <h3 style="margin:56px 0 6px">The system maintains itself</h3>
+    <p style="color:var(--ink-soft);max-width:64ch">
+      The point of the automation isn't that jobs run on a schedule. It's that the work no longer
+      depends on someone remembering to do it. The pipeline keeps filling, the data keeps
+      correcting itself, and the library keeps growing whether anyone is paying attention or not.
+    </p>
+
+    <div class="auto-list">
+      <div class="auto">
+        <h4>Sourcing continues without me</h4>
+        <p>The discovery crawl runs on its own through the working week, so the candidate queue is
+        already full when someone sits down to review it. Nobody schedules a "go find creators" task.</p>
+      </div>
+      <div class="auto">
+        <h4>The data corrects itself</h4>
+        <p>Profile links are re-validated continuously and dead ones flagged, so the database degrades
+        visibly instead of silently. Creator images are backfilled so records stay usable long after
+        a profile changes.</p>
+      </div>
+      <div class="auto">
+        <h4>Content files itself</h4>
+        <p>New creator deliverables are found, attributed and indexed throughout the working day, and
+        deleted ones disappear. No one maintains a folder structure.</p>
+      </div>
+      <div class="auto">
+        <h4>Reporting is never "pulled"</h4>
+        <p>Because analysis reads live operational records, there is no reporting cycle, no export
+        step and no reconciliation between what the team works in and what leadership sees.</p>
+      </div>
+    </div>
+
+    <!-- ---- 6. engineering ---- -->
+    <h3 style="margin:56px 0 6px">The performance rescue, measured</h3>
+    <p style="color:var(--ink-soft);max-width:64ch">
+      These numbers measure the software, not the business. I've kept them exact because the
+      diagnosis is the interesting part: the bug was invisible by construction, and I found it by
+      measuring the running application rather than reading the code.
+    </p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th style="text-align:right">Before</th><th style="text-align:right">After</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Core data load</td><td class="num">68 s</td><td class="num after">0.35 s</td></tr>
+          <tr><td>Image requests at page load</td><td class="num">185</td><td class="num after">0</td></tr>
+          <tr><td>Failed avatar requests per load</td><td class="num">99</td><td class="num after">0</td></tr>
+          <tr><td>Payload size</td><td class="num">2.74 MB</td><td class="num after">1.63 MB</td></tr>
+          <tr><td>Browser cache writes</td><td class="num">never succeeded</td><td class="num after">succeeds</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="narrative">
+      <p>
+        <strong>194&times; faster</strong> on the request blocking first paint. Payload cut
+        <strong>40%</strong> by removing data duplicated inside the same response. A shared
+        server-side cache with <strong>6.4&times; compression</strong> means every user benefits from
+        one fetch rather than each paying full cost.
+      </p>
+      <p>
+        The discipline worth noting: I suspected an infrastructure bottleneck, investigated it,
+        measured it at <strong>0.4% of total latency</strong>, and deliberately did not touch it.
+        The real cause was two caches failing in silence, and I would have missed it if I'd trusted
+        the hypothesis instead of the measurement.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ EXHIBIT 02 ============ -->
+<section id="ekta">
+  <div class="wrap">
+
+    <div class="exhibit-head">
+      <div class="exhibit-num">Exhibit 02 &middot; Product management</div>
+      <h2>Ekta</h2>
+      <p class="lede" style="font-size:1.05rem">
+        Field canvassing app and monitoring dashboard for a national legislative campaign.
+        Satu Teknologi Digital, Jakarta.
+      </p>
+    </div>
+
+    <div class="factbar">
+      <div class="fact"><div class="k">Role</div><div class="v">Product Manager</div></div>
+      <div class="fact"><div class="k">Team</div><div class="v">Cross-functional, with in-house engineering</div></div>
+      <div class="fact"><div class="k">Window</div><div class="v">2023 – 2024, hard election deadline</div></div>
+      <div class="fact"><div class="k">Scale</div><div class="v">500,000+ canvassing activities in 6 months</div></div>
+    </div>
+
+    <div class="narrative">
+      <h3 style="margin-bottom:18px">The problem</h3>
+      <p>
+        Field canvassing at national scale is a coordination problem wearing a data problem's
+        clothes. Hundreds of volunteers working across regions, recording door-to-door contact on
+        paper or in ad-hoc chats, with no reliable way for campaign leadership to see coverage,
+        duplication or progress until long after the window to act on it had closed.
+      </p>
+
+      <h3 style="margin:38px 0 18px">What I did</h3>
+      <p>
+        I ran product for the canvassing app and its monitoring dashboard, translating what field
+        teams actually did into something an engineering team could build, then holding scope
+        against a deadline that could not move. I led the upstream research as well: user profiling,
+        market analysis and positioning work that redefined the project's direction before a line of
+        the app was written.
+      </p>
+      <p>
+        Alongside it I ran daily content operations for an active user base of 50,000+, and held the
+        relationships with government bodies, partners and clients that kept the programme supported.
+      </p>
+      <p>
+        The detail I can publish about this one is limited by the context it was built in. I am happy
+        to walk through the product decisions, the things that did not work, and the adoption problem
+        in conversation.
+      </p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="n hi">500K+</span><span class="l">Canvassing activities logged in 6 months</span></div>
+      <div class="stat"><span class="n">50K+</span><span class="l">Active users in the content ecosystem</span></div>
+      <div class="stat"><span class="n">18</span><span class="l">Months on the programme</span></div>
+    </div>
+
+
+
+  </div>
+</section>
+
+<!-- ============ HOW I WORK ============ -->
+<section id="how">
+  <div class="wrap">
+
+    <div class="sec-head">
+      <div class="eyebrow">Method</div>
+      <h2>How I work</h2>
+      <p class="lede">Four rules, each one bought with a specific mistake.</p>
+    </div>
+
+    <div class="principles">
+      <div class="principle">
+        <h4>Do the job before you automate it</h4>
+        <p>
+          Every good decision in Creator Discovery Lab came from having personally done the tedious
+          version first. You cannot correctly frame a workflow problem you have only heard described.
+        </p>
+      </div>
+      <div class="principle">
+        <h4>Silent failure is the primary risk</h4>
+        <p>
+          Both major outages traced to errors swallowed by empty exception handlers. A system that
+          fails loudly gets fixed in an hour; one that fails quietly gets fixed in a month, after it
+          has already corrupted something.
+        </p>
+      </div>
+      <div class="principle">
+        <h4>Variation is configuration, not code</h4>
+        <p>
+          Folder structures, categories, brand onboarding are all data. A new client requires no
+          deployment. This is the line between a tool that serves three clients and one that serves
+          thirty.
+        </p>
+      </div>
+      <div class="principle">
+        <h4>Measure before you fix</h4>
+        <p>
+          I've been confidently wrong about a bottleneck and caught it only by measuring. Now the
+          hypothesis never gets actioned before the number does.
+        </p>
+      </div>
+    </div>
+
+    <div class="belt">
+      <div class="belt-col">
+        <h4>Build</h4>
+        <ul>
+          <li>AI-assisted development</li>
+          <li>Chrome extensions</li>
+          <li>Scheduled jobs &amp; scraping pipelines</li>
+          <li>Caching &amp; performance profiling</li>
+          <li>Google Drive / Sheets APIs</li>
+        </ul>
+      </div>
+      <div class="belt-col">
+        <h4>Product &amp; ops</h4>
+        <ul>
+          <li>Problem framing &amp; user research</li>
+          <li>Requirement gathering to deployment</li>
+          <li>Scope planning under fixed deadlines</li>
+          <li>Metric design &amp; KPI tracking</li>
+          <li>Stakeholder management</li>
+        </ul>
+      </div>
+      <div class="belt-col">
+        <h4>Tools</h4>
+        <ul>
+          <li>Asana, Trello, Figma</li>
+          <li>WordPress, Elementor</li>
+          <li>HubSpot, Mailchimp</li>
+          <li>Google Analytics, Meltwater</li>
+          <li>Facebook Business Manager</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ BACKGROUND ============ -->
+<section id="background">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Track record</div>
+      <h2>Background</h2>
+      <p class="lede">Six years across community, partnerships and product, consistently at the point where operations meets tooling.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-when">Dec 2025 - Present</div>
+        <div>
+          <div class="tl-role">Community Engagement &amp; KOL Management</div>
+          <div class="tl-org">HeyRCG | Bali, Indonesia</div>
+          <div class="tl-body">
+            Designed, built and operate Creator Discovery Lab. Manage daily Instagram outreach across
+            10 brand accounts in F&amp;B, fitness and hospitality, facilitating 100+ monthly KOL
+            visits. Built the master tracking system within the first two months.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Jan 2025 - Jul 2025</div>
+        <div>
+          <div class="tl-role">Project Manager, Digital Platform</div>
+          <div class="tl-org">Kadin Indonesia Institute | Jakarta</div>
+          <div class="tl-body">
+            End-to-end delivery of websites and digital platforms, from requirement gathering and
+            timeline planning through stakeholder coordination to deployment. Managed cross-functional
+            technical, content and UX teams.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Jul 2024 - Feb 2025</div>
+        <div>
+          <div class="tl-role">Digital Platform Lead</div>
+          <div class="tl-org">Yayasan Rela Nusantara &amp; Yayasan Indonesia Berbakti | Jakarta</div>
+          <div class="tl-body">
+            Built websites from the ground up with Figma, WordPress and Elementor, driving consistent
+            daily traffic in the hundreds. Ran analytics monitoring and iterative releases with a
+            US-based consultant team.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Jan 2023 - Jun 2024</div>
+        <div>
+          <div class="tl-role">Project Manager, Ekta</div>
+          <div class="tl-org">Satu Teknologi Digital | Jakarta</div>
+          <div class="tl-body">
+            Product research and user profiling that redefined project direction. Worked with
+            engineering to deliver a canvassing app and monitoring dashboard, logging 500,000+ canvassing
+            activities in six months. Led content operations for 50,000+ active users.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Sep 2020 - Dec 2022</div>
+        <div>
+          <div class="tl-role">Community Activation Associate → Executive</div>
+          <div class="tl-org">GoTo (Gojek Tokopedia) | Jakarta</div>
+          <div class="tl-body">
+            Content, publication and communication strategy for activations across GoBiz, GoStore,
+            Selly and GoPay. 10,000+ annual online attendees. Built 500+ partnerships a year and cut
+            event costs 60% through value-driven collaborations. Scaled the KAMUS merchant learning
+            platform to hundreds of thousands of SMEs.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">Dec 2019 - Sep 2020</div>
+        <div>
+          <div class="tl-role">Community Activation Officer</div>
+          <div class="tl-org">Moka Indonesia | Jakarta</div>
+          <div class="tl-body">
+            Community research and mapping across 50+ communities in multiple Indonesian cities.
+            Partnerships and events generating 600+ leads. Competitive benchmarking against 5+ direct
+            competitors.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-when">2015 - 2019</div>
+        <div>
+          <div class="tl-role">BA Sociology, Summa Cum Laude (GPA 3.86)</div>
+          <div class="tl-org">University of Brawijaya | Malang</div>
+          <div class="tl-body">
+            Best Sociology Graduate, Second Best Faculty Graduate. Outstanding Student of the
+            Sociology Department, 2017.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Available</div>
+    <h2 style="margin-top:14px">Let's talk.</h2>
+    <p>
+      I'm looking for roles where building the tools <em>is</em> the job: internal tools, AI
+      operations, solutions engineering, or product in a team that ships close to the problem.
+    </p>
+    <div class="contact-row" style="justify-content:center">
+      <a class="btn btn-primary" href="mailto:imamfikri.ir@gmail.com">imamfikri.ir@gmail.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/imamfikri/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="foot-note">
+      Client brands and creator identities are withheld throughout.<br>
+      Operational volumes are rounded; engineering measurements are exact and reproducible.<br>
+      Time-saved and cost-saved figures are deliberately omitted.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
